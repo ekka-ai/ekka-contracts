@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.ekka.ai/common/error.schema.json",
+  "title": "ErrorPayload",
+  "description": "Structured error response payload",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Error category",
+      "enum": [
+        "not_found",
+        "invalid_input",
+        "crypto_error",
+        "io_error",
+        "serde_error",
+        "queue_error",
+        "lease_invalid",
+        "vault_error",
+        "internal"
+      ]
+    },
+    "retryable": {
+      "type": "boolean",
+      "description": "Whether the operation can be retried"
+    },
+    "user_message": {
+      "type": "string",
+      "description": "Human-readable error message for end users"
+    },
+    "debug_message": {
+      "type": "string",
+      "description": "Detailed error message for debugging"
+    },
+    "correlation_id": {
+      "type": "string",
+      "description": "Request correlation ID for tracing",
+      "format": "uuid"
+    }
+  },
+  "required": ["kind", "retryable", "user_message", "debug_message"],
+  "additionalProperties": false
+}

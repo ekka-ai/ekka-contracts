@@ -1,0 +1,4 @@
+{"type":"intent_received","intent_id":"59d397d6-2a67-4975-abff-55c3827463db","correlation_id":"eae5dc60-fbd0-496e-af15-c04c50091783","op":"test.echo","timestamp":"2026-01-15T00:35:28.491289Z"}
+{"type":"policy_resolved","intent_id":"59d397d6-2a67-4975-abff-55c3827463db","correlation_id":"eae5dc60-fbd0-496e-af15-c04c50091783","policy_source":"default","timestamp":"2026-01-15T00:35:28.491755Z"}
+{"type":"preflight_completed","intent_id":"59d397d6-2a67-4975-abff-55c3827463db","correlation_id":"eae5dc60-fbd0-496e-af15-c04c50091783","advisor_id":"stub.allow","decision":"ALLOW","confidence":1.0,"timestamp":"2026-01-15T00:35:28.491893Z"}
+{"type":"intent_decided","intent_id":"59d397d6-2a67-4975-abff-55c3827463db","correlation_id":"eae5dc60-fbd0-496e-af15-c04c50091783","decision":"ALLOW","reason":null,"timestamp":"2026-01-15T00:35:28.492034Z"}

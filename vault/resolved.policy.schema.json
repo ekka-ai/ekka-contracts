@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.ekka.ai/vault/resolved.policy.schema.json",
+  "title": "ResolvedPolicy",
+  "description": "Resolved policy profile with source information",
+  "type": "object",
+  "properties": {
+    "profile": {
+      "$ref": "../governance/policy.profile.schema.json",
+      "description": "The resolved policy profile"
+    },
+    "source": {
+      "type": "object",
+      "description": "Source of the resolved policy",
+      "properties": {
+        "bundle_id": {
+          "type": "string",
+          "description": "Bundle ID that provided this policy"
+        },
+        "version": {
+          "type": "string",
+          "description": "Bundle version"
+        }
+      },
+      "required": ["bundle_id", "version"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["profile", "source"],
+  "additionalProperties": false
+}

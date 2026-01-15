@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.ekka.ai/protocol/envelope.schema.json",
+  "title": "ResponseEnvelope",
+  "description": "Standard API response envelope wrapping success or error",
+  "oneOf": [
+    {
+      "type": "object",
+      "title": "SuccessEnvelope",
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "const": true
+        },
+        "data": {
+          "description": "Response payload (type varies by endpoint)"
+        }
+      },
+      "required": ["ok", "data"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "title": "ErrorEnvelope",
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "const": false
+        },
+        "error": {
+          "$ref": "../common/error.schema.json"
+        }
+      },
+      "required": ["ok", "error"],
+      "additionalProperties": false
+    }
+  ]
+}

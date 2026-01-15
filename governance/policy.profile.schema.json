@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.ekka.ai/governance/policy.profile.schema.json",
+  "title": "PolicyProfile",
+  "description": "Policy profile configuration for an operation",
+  "type": "object",
+  "properties": {
+    "op": {
+      "type": "string",
+      "description": "Operation this profile applies to (e.g., 'file.write', 'test.echo')",
+      "minLength": 1
+    },
+    "preflight": {
+      "$ref": "#/$defs/FlightConfig",
+      "description": "Preflight advisor configuration"
+    },
+    "postflight": {
+      "$ref": "#/$defs/FlightConfig",
+      "description": "Postflight advisor configuration"
+    },
+    "ai_defaults": {
+      "type": "object",
+      "description": "Default AI provider/model settings",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Default AI provider"
+        },
+        "model": {
+          "type": "string",
+          "description": "Default AI model"
+        }
+      },
+      "required": ["provider", "model"],
+      "additionalProperties": false
+    },
+    "thresholds": {
+      "type": "object",
+      "description": "Decision confidence thresholds",
+      "properties": {
+        "allow_min": {
+          "type": "number",
+          "description": "Minimum confidence for ALLOW",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "escalate_below": {
+          "type": "number",
+          "description": "Confidence below which to ESCALATE",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": ["allow_min", "escalate_below"],
+      "additionalProperties": false
+    },
+    "allow_overrides": {
+      "type": "boolean",
+      "description": "Whether user can override AI settings"
+    },
+    "fallback": {
+      "type": "string",
+      "description": "Fallback behavior when advisor fails",
+      "enum": ["allow", "block", "escalate"]
+    }
+  },
+  "required": ["op", "preflight", "postflight", "ai_defaults", "thresholds", "allow_overrides", "fallback"],
+  "additionalProperties": false,
+  "$defs": {
+    "FlightConfig": {
+      "type": "object",
+      "description": "Configuration for preflight/postflight advisor",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether this flight stage is enabled"
+        },
+        "advisor_id": {
+          "type": "string",
+          "description": "Advisor ID to use (e.g., 'stub.allow', 'llm.claude')"
+        }
+      },
+      "required": ["enabled", "advisor_id"],
+      "additionalProperties": false
+    }
+  }
+}

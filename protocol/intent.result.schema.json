@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.ekka.ai/protocol/intent.result.schema.json",
+  "title": "IntentResult",
+  "description": "Result of intent processing",
+  "type": "object",
+  "properties": {
+    "intent_id": {
+      "type": "string",
+      "description": "Unique identifier for this intent",
+      "format": "uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "description": "Correlation ID for request tracing",
+      "format": "uuid"
+    },
+    "decision": {
+      "type": "string",
+      "description": "Final decision outcome",
+      "enum": ["ALLOW", "BLOCK", "ESCALATE"]
+    },
+    "status": {
+      "type": "string",
+      "description": "Intent processing status",
+      "enum": [
+        "received",
+        "policy_resolved",
+        "preflight_completed",
+        "decided",
+        "accepted",
+        "denied",
+        "escalated"
+      ]
+    },
+    "ai_used": {
+      "type": "object",
+      "description": "AI provider/model actually used",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "AI provider used"
+        },
+        "model": {
+          "type": "string",
+          "description": "AI model used"
+        }
+      },
+      "required": ["provider", "model"],
+      "additionalProperties": false
+    },
+    "reason": {
+      "type": "string",
+      "description": "Human-readable reason for decision (if applicable)"
+    }
+  },
+  "required": ["intent_id", "correlation_id", "decision", "status"],
+  "additionalProperties": false
+}

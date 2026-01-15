@@ -1,0 +1,9 @@
+{
+  "ok": false,
+  "error": {
+    "kind": "invalid_input",
+    "retryable": false,
+    "user_message": "Invalid JSON payload: expected value at line 1 column 1",
+    "debug_message": "Invalid JSON payload: expected value at line 1 column 1"
+  }
+}

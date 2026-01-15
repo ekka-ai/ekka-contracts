@@ -1,0 +1,5 @@
+node_modules/
+generated/ts/*.js
+generated/ts/*.d.ts
+*.log
+.DS_Store

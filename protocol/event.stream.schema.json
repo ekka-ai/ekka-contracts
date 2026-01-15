@@ -1,0 +1,157 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.ekka.ai/protocol/event.stream.schema.json",
+  "title": "PipelineEvent",
+  "description": "Discriminated union of pipeline events",
+  "oneOf": [
+    {
+      "type": "object",
+      "title": "IntentReceivedEvent",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "intent_received"
+        },
+        "intent_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "correlation_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "op": {
+          "type": "string",
+          "description": "Operation identifier"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["type", "intent_id", "correlation_id", "op", "timestamp"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "title": "PolicyResolvedEvent",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "policy_resolved"
+        },
+        "intent_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "correlation_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "policy_source": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "default"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "bundle": {
+                  "type": "object",
+                  "properties": {
+                    "bundle_id": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["bundle_id", "version"],
+                  "additionalProperties": false
+                }
+              },
+              "required": ["bundle"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["type", "intent_id", "correlation_id", "policy_source", "timestamp"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "title": "PreflightCompletedEvent",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "preflight_completed"
+        },
+        "intent_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "correlation_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "advisor_id": {
+          "type": "string",
+          "description": "Advisor that processed the preflight"
+        },
+        "decision": {
+          "type": "string",
+          "enum": ["ALLOW", "BLOCK", "ESCALATE"]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["type", "intent_id", "correlation_id", "advisor_id", "decision", "confidence", "timestamp"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "title": "IntentDecidedEvent",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "intent_decided"
+        },
+        "intent_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "correlation_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "decision": {
+          "type": "string",
+          "enum": ["ALLOW", "BLOCK", "ESCALATE"]
+        },
+        "reason": {
+          "type": ["string", "null"],
+          "description": "Reason for decision"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["type", "intent_id", "correlation_id", "decision", "reason", "timestamp"],
+      "additionalProperties": false
+    }
+  ]
+}

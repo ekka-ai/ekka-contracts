@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "data": {
+    "intent_id": "59d397d6-2a67-4975-abff-55c3827463db",
+    "correlation_id": "eae5dc60-fbd0-496e-af15-c04c50091783",
+    "decision": "ALLOW",
+    "status": "accepted",
+    "ai_used": {
+      "provider": "openai",
+      "model": "gpt-4"
+    }
+  }
+}
