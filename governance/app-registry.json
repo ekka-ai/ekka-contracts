@@ -1,0 +1,52 @@
+{
+  "version": "1",
+  "roles": {
+    "engine_user": {
+      "capabilities": [
+        "engine.workflow_runs.create",
+        "engine.workflow_runs.read",
+        "engine.workflow_runs.list",
+        "engine.prompts.read"
+      ]
+    },
+    "engine_runner": {
+      "capabilities": [
+        "engine.runner_tasks.read",
+        "engine.runner_tasks.claim",
+        "engine.runner_tasks.complete"
+      ]
+    },
+    "engine_admin": {
+      "capabilities": [
+        "engine.workflow_runs.cancel",
+        "engine.workflow_runs.heartbeat"
+      ]
+    }
+  },
+  "apps": {
+    "desktop": {
+      "uuid": "00000000-0000-0000-0000-000000000001",
+      "enabled": true,
+      "display_name": "EKKA Desktop",
+      "roles": ["engine_user", "engine_runner", "engine_admin"]
+    },
+    "forge": {
+      "uuid": "00000000-0000-0000-0000-000000000002",
+      "enabled": true,
+      "display_name": "EKKA Forge",
+      "roles": ["engine_user", "engine_admin"]
+    },
+    "studio": {
+      "uuid": "00000000-0000-0000-0000-000000000003",
+      "enabled": true,
+      "display_name": "EKKA Studio",
+      "roles": ["engine_user"]
+    },
+    "lexstudio": {
+      "uuid": "00000000-0000-0000-0000-000000000004",
+      "enabled": true,
+      "display_name": "EKKA LexStudio",
+      "roles": ["engine_user"]
+    }
+  }
+}
