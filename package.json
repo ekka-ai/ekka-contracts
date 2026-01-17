@@ -1,10 +1,13 @@
 {
-  "name": "@ekka/contracts",
+  "name": "@ekka-ai/contracts",
   "version": "0.1.0",
   "description": "EKKA Protocol Contracts - JSON Schemas and TypeScript types",
   "type": "module",
   "main": "generated/ts/index.js",
   "types": "generated/ts/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "validate": "tsx scripts/validate_samples.ts",
     "generate:types": "tsx scripts/generate_ts_types.ts",
